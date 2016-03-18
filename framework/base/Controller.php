@@ -37,10 +37,13 @@ class Controller {
 				$tpl = 'app/'.APP_NAME . '/view/' . strtolower(CONTROLLER_NAME) . config('TPL.TPL_DEPR') . strtolower(ACTION_NAME);
 			}
 			if( $this->layout ){
-				$this->__template_file = $tpl;
-				$tpl = $this->layout;
+				$layoutTpl = 'app/'.APP_NAME . '/view/' . $this->layout;
+				$this->_getView()->setLayout($layoutTpl);
+//				$this->__template_file = $tpl;
+//				$tpl = $this->layout;
+
 			}
-		}	
+		}
 		$this->_getView()->assign( get_object_vars($this));
 		return $this->_getView()->display($tpl, $return, $isTpl);
 	}
@@ -128,7 +131,7 @@ class Controller {
 
 	/**
 	 * 获取模板对象
-	 * @return object
+	 * @return Template
 	 */
 	protected function _getView(){
 		static $view;		

@@ -33,6 +33,12 @@ class Template {
 	protected $cache = null;
 
 	/**
+	 * 布局模板
+	 * @var null
+	 */
+	protected $layout = null;
+
+	/**
 	 * 构建函数
 	 * @param array $config 模板引擎配置
 	 */
@@ -97,7 +103,11 @@ class Template {
 		
 		$this->cache = new Cache( $this->config['TPL_CACHE'] );
 	}
-	
+
+	public function setLayout( $layout ){
+		$this->layout = $layout;
+	}
+
 	/**
 	 * 模板赋值
 	 * @param  string $name  变量名
@@ -159,7 +169,17 @@ class Template {
 
 		$ret = unserialize( $this->cache->get( $tplKey ) );
 		if ( empty($ret['template']) || ($isTpl&&filemtime($tplFile)>($ret['compile_time'])) ) {
-			$template = $isTpl ? file_get_contents( $tplFile ) : $tpl;
+			if($this->layout && $isTpl){
+				$layoutTplFile = $this->config['TPL_PATH'] . $this->layout . $this->config['TPL_SUFFIX'];
+				if ( !file_exists($tplFile) ) {
+					throw new \Exception("Layout Template file '{$tplFile}' not found", 500);
+				}
+				$template =  file_get_contents( $layoutTplFile );
+				$content = file_get_contents( $tplFile );
+				$template = str_replace('{CONTENT}',$content,$template);
+			}else{
+				$template = $isTpl ? file_get_contents( $tplFile ) : $tpl;
+			}
 			if( false === Hook::listen('templateParse', array($template), $template) ){
 				foreach ($this->label as $key => $value) {
 						$template = preg_replace($key, $value, $template);

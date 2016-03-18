@@ -16,7 +16,7 @@ class DefaultController extends \app\base\controller\BaseController {
 	 * 首页
 	 */
 	public function index() {
-		$this->layout='app/main/view/layout/index';
+		$this->layout='layout/index';
 		$this->title = obj('Demo')->getTitle();
 		$this->hello = obj('Demo')->getHello();
 		$this->display();
