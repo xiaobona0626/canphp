@@ -125,4 +125,4 @@ spl_autoload_register(function($class){
 	return false;
 });
 
-App::run();
+//App::run();

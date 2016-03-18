@@ -66,7 +66,7 @@ class Config {
 				'TPL_PATH' => $basePath,
 				'TPL_SUFFIX' => '.html',
 				'TPL_CACHE' => 'TPL_CACHE',
-				'TPL_DEPR' => '_',					
+				'TPL_DEPR' => '/',
 			),
 			
 			'CACHE'=>array(

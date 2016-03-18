@@ -57,7 +57,7 @@ class Template {
 			
 			/**include label
 				{include file="test"}
-			*/                              
+			*/
 			'/{include\s*file=\"(.*)\"}/i' => "<?php \$__Template->display(\"$1\"); ?>",
 			
 			/**if label
@@ -157,12 +157,12 @@ class Template {
 			$tplKey = md5($tpl);
 		}
 
-		$ret = unserialize( $this->cache->get( $tplKey ) );	
+		$ret = unserialize( $this->cache->get( $tplKey ) );
 		if ( empty($ret['template']) || ($isTpl&&filemtime($tplFile)>($ret['compile_time'])) ) {
 			$template = $isTpl ? file_get_contents( $tplFile ) : $tpl;
 			if( false === Hook::listen('templateParse', array($template), $template) ){
 				foreach ($this->label as $key => $value) {
-					$template = preg_replace($key, $value, $template);
+						$template = preg_replace($key, $value, $template);
 				}		
 			}
 			$ret = array('template'=>$template, 'compile_time'=>time());

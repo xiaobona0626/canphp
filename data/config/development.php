@@ -13,13 +13,24 @@ return array (
 		'default' => 
 			array (
 				'DB_TYPE' => 'mysqlpdo',
-				'DB_HOST' => 'localhost',
+				'DB_HOST' => '192.168.101.94',
 				'DB_USER' => 'root',
-				'DB_PWD' => 'asdfgh',
+				'DB_PWD' => 'edaili123.',
 				'DB_PORT' => '3306',
-				'DB_NAME' => 'cp',
+				'DB_NAME' => 'edaili',
 				'DB_CHARSET' => 'utf8',
 				'DB_PREFIX' => '',
 			),
+		'db2' =>
+			array(
+				'DB_TYPE' => 'mysqlpdo',
+				'DB_HOST' => '192.168.101.94',
+				'DB_USER' => 'root',
+				'DB_PWD' => 'edaili123.',
+				'DB_PORT' => '3306',
+				'DB_NAME' => 'test2',
+				'DB_CHARSET' => 'utf8',
+				'DB_PREFIX' => '',
+			)
 	),
 );

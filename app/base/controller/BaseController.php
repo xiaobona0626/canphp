@@ -12,7 +12,7 @@ class BaseController extends \framework\base\Controller {
 	 * 初始化
 	 */
 	public function __construct() {
-	
+
 	}
 
 }
