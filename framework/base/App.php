@@ -38,7 +38,6 @@ class App {
 			Hook::listen('appBegin');
 
 			Hook::listen('routeParseUrl', array( Config::get('REWRITE_RULE'), Config::get('REWRITE_ON')));
-			
 			//default route
 			if( !defined('APP_NAME') || !defined('CONTROLLER_NAME') || !defined('ACTION_NAME')){
 				Route::parseUrl( Config::get('REWRITE_RULE'), Config::get('REWRITE_ON') );
@@ -57,7 +56,6 @@ class App {
 			
 			Hook::listen('actionBefore', array($obj, $action));
 			$obj ->$action();
-			print_r($action);
 			Hook::listen('actionAfter', array($obj, $action));
 			
 		} catch(\Exception $e){

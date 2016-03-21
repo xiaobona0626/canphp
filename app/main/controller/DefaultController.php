@@ -6,11 +6,11 @@
 
 namespace app\main\controller;
 
-use app\lib\Test;
 use app\main\model\DemoModel;
 use app\main\model\EdailiModel;
+use app\base\controller\BaseController;
 
-class DefaultController extends \app\base\controller\BaseController {
+class DefaultController extends BaseController {
 	
 	/**
 	 * 首页
