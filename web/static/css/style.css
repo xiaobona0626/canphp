@@ -422,20 +422,20 @@ body.fixed-sidebar.mini-navbar .navbar-default .nav li a span {
   margin-bottom: 0;
 }
 .top-navigation .nav > li > a {
-  padding: 15px 20px;
-  color: #676a6c;
+  padding: 10px 20px;
+  color: #fff;
 }
 .top-navigation .nav > li a:hover,
 .top-navigation .nav > li a:focus {
-  background: #fff;
-  color: #1ab394;
+
+  color: #949090;
 }
 .top-navigation .nav > li.active {
-  background: #fff;
+ 
   border: none;
 }
 .top-navigation .nav > li.active > a {
-  color: #1ab394;
+  color: #fff;
 }
 .top-navigation .navbar-right {
   margin-right: 10px;
@@ -2827,7 +2827,7 @@ video {
 /* WRAPPERS */
 #wrapper {
   width: 100%;
-  overflow-x: hidden;
+ 
 }
 .wrapper {
   padding: 0 20px;

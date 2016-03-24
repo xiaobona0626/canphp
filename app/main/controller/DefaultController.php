@@ -10,19 +10,20 @@ use app\main\model\DemoModel;
 use app\main\model\EdailiModel;
 use app\base\controller\BaseController;
 
+/**
+ * dashboard 后台主页面
+ * Class DefaultController
+ * @package app\main\controller
+ */
 class DefaultController extends BaseController {
 	
 	/**
 	 * 首页
 	 */
 	public function index() {
-		$this->layout='layout/index';
+		//$this->layout='layout/index';
 		$this->title = obj('Demo')->getTitle();
 		$this->hello = obj('Demo')->getHello();
-		$this->display();
-	}
-
-	public function upload() {
 		$this->display();
 	}
 

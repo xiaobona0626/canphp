@@ -15,4 +15,20 @@ class BaseController extends \framework\base\Controller {
 
 	}
 
+	public static function outFail($code,$msg='no',$data=''){
+		exit(json_encode([
+			'code'=>$code,
+			'msg'=>$msg,
+			'data'=>$data
+		]));
+	}
+
+	public static function outSuccess($data='',$code=200,$msg='ok'){
+		exit(json_encode([
+			'code'=>$code,
+			'msg'=>$msg,
+			'data'=>$data
+		]));
+	}
+
 }

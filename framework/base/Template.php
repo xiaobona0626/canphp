@@ -186,7 +186,8 @@ class Template {
 				}		
 			}
 			$ret = array('template'=>$template, 'compile_time'=>time());
-			$this->cache->set( $tplKey, serialize($ret), 86400*365);
+			//$this->cache->set( $tplKey, serialize($ret), 86400*365);
+			$this->cache->set( $tplKey, serialize($ret),2);
 		}	
 		return $ret['template'];
 	}

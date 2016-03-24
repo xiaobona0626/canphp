@@ -65,6 +65,9 @@ class Hook {
 		if( !isset($objArr[$class]) ){
 			$objArr[$class]= new $class();
 		}
+//		echo "------------------------------------------------------";
+//		print_r([$class,$method]);
+//		print_r($params);
 		return call_user_func_array(array($objArr[$class], $method), (array)$params);
 	}
 }

@@ -60,8 +60,8 @@ class Route {
 		$routeArr = isset($_REQUEST['r']) ? explode("/", $_REQUEST['r']) : array();
 		//$app_name = empty($routeArr[0]) ? Config::get('DEFAULT_APP') : $routeArr[0];
 		$app_name = APP_NAME;
-		$controller_name = empty($routeArr[1]) ? Config::get('DEFAULT_CONTROLLER') : $routeArr[0];
-		$action_name = empty($routeArr[2]) ? Config::get('DEFAULT_ACTION') : $routeArr[1];
+		$controller_name = empty($routeArr[0]) ? Config::get('DEFAULT_CONTROLLER') : $routeArr[0];
+		$action_name = empty($routeArr[1]) ? Config::get('DEFAULT_ACTION') : $routeArr[1];
 		$_REQUEST['r'] = $app_name .'/'. $controller_name .'/'. $action_name;
 		
 		if( !defined('APP_NAME') ) define('APP_NAME', strtolower($app_name));

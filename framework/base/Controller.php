@@ -20,8 +20,8 @@ class Controller {
 	 * @param  mixed  $value 变量值
 	 * @return void
 	 */
-	public function assign($name, $value=NULL) {
-		return $this->_getView()->assign( $name, $value);
+	public function assign($name, $value=NULL,$nocache = false) {
+		return $this->_getView()->assign($name, $value, $nocache);
 	}
 
 	/**
@@ -32,20 +32,24 @@ class Controller {
 	 * @return mixed
 	 */
 	public function display($tpl = '', $return = false, $isTpl = true) {
-		if( $isTpl ){
-			if( empty($tpl) ){
-				$tpl = 'app/'.APP_NAME . '/view/' . strtolower(CONTROLLER_NAME) . config('TPL.TPL_DEPR') . strtolower(ACTION_NAME);
-			}
-			if( $this->layout ){
-				$layoutTpl = 'app/'.APP_NAME . '/view/' . $this->layout;
-				$this->_getView()->setLayout($layoutTpl);
-//				$this->__template_file = $tpl;
-//				$tpl = $this->layout;
-
-			}
+		if( empty($tpl) ){
+			$tpl =  strtolower(CONTROLLER_NAME) . config('TPL.TPL_DEPR') . strtolower(ACTION_NAME).''.config('TPL.TPL_SUFFIX');
 		}
-		$this->_getView()->assign( get_object_vars($this));
-		return $this->_getView()->display($tpl, $return, $isTpl);
+		return $this->_getView()->display($tpl);
+//		if( $isTpl ){
+//			if( empty($tpl) ){
+//				$tpl = 'app/'.APP_NAME . '/view/' . strtolower(CONTROLLER_NAME) . config('TPL.TPL_DEPR') . strtolower(ACTION_NAME);
+//			}
+//			if( $this->layout ){
+//				$layoutTpl = 'app/'.APP_NAME . '/view/' . $this->layout;
+//				$this->_getView()->setLayout($layoutTpl);
+////				$this->__template_file = $tpl;
+////				$tpl = $this->layout;
+//
+//			}
+//		}
+//		$this->_getView()->assign( get_object_vars($this));
+//		return $this->_getView()->display($tpl, $return, $isTpl);
 	}
 
 	/**
@@ -131,12 +135,22 @@ class Controller {
 
 	/**
 	 * 获取模板对象
-	 * @return Template
+	 * Template
+	 * @return \Smarty
 	 */
 	protected function _getView(){
 		static $view;		
 		if( !isset($view) ){
-			$view = new Template( Config::get('TPL') );
+			//$view = new Template( Config::get('TPL') );
+			$view = new \Smarty();
+			//echo ROOT_PATH . 'app/'.APP_NAME . '/view/';exit;
+			$view->setTemplateDir( ROOT_PATH . 'app/'.APP_NAME . '/view/');
+			$view->setCompileDir(ROOT_PATH . 'data/cache/tpl/');
+			//$view->debugging = true;
+			$view->caching = false;
+			$view->cache_lifetime = 2;
+			$view->left_delimiter = '{{';
+			$view->right_delimiter = '}}';
 		}		
 		return $view;
 	}

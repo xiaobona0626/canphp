@@ -124,10 +124,16 @@ class MysqlPdoDriver implements DbInterface {
 	public function rollBack() {
 		return $this->_getWriteLink()->rollBack();
 	}
-	
+
+	/**
+	 * @param $sql
+	 * @param array $params
+	 * @param \PDO $link
+	 * @return mixed
+	 */
 	protected function _bindParams($sql, array $params, $link=null) {
 		$this->sqlMeta = array('sql'=>$sql, 'params'=>$params, 'link'=>$link);
-		$sth = $link->prepare($sql);		
+		$sth = $link->prepare($sql);
 		foreach($params as $k=>$v){
 			$sth->bindValue($k, $v);
 		}				

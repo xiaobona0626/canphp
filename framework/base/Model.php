@@ -224,7 +224,7 @@ class Model {
 	 * 设置表
 	 * @param  string  $table     表名
 	 * @param  boolean $ignorePre 独立前缀
-	 * @return object
+	 * @return self
 	 */
 	public function table($table, $ignorePre = false) {
 		$this->options['table'] = $ignorePre ? $table : $this->config['DB_PREFIX'] . $table;
@@ -235,7 +235,7 @@ class Model {
 	 * 联操作表
 	 * @param  string $join 联接表语句
 	 * @param  string $way  联接类型
-	 * @return object
+	 * @return self
 	 */
 	public function join($join, $way='inner') {
 		$join = str_replace('{pre}', $this->config['DB_PREFIX'], $join);
@@ -246,7 +246,7 @@ class Model {
 	/**
 	 * 查询字段
 	 * @param  string $field 查询表指定字段
-	 * @return object
+	 * @return self
 	 */
 	public function field($field) {
 		$this->options['field'] = $field;
@@ -256,7 +256,7 @@ class Model {
 	/**
 	 * 操作数据
 	 * @param  array  $data 插入或者更新数据数组
-	 * @return object
+	 * @return self
 	 */
 	public function data(array $data = array()) {
 		$this->options['data'] = $data;
@@ -266,7 +266,7 @@ class Model {
 	/**
 	 * 查询条件
 	 * @param  array  $where 条件数组
-	 * @return object
+	 * @return self
 	 */
 	public function where(array $where = array()) {
 		$this->options['where'] = $where;
@@ -276,7 +276,7 @@ class Model {
 	/**
 	 * 排序规则
 	 * @param  string $order 查询结果排序
-	 * @return object
+	 * @return self
 	 */
 	public function order($order) {
 		$this->options['order'] = $order;
@@ -286,7 +286,7 @@ class Model {
 	/**
 	 * 查询数量
 	 * @param  integer $limit 查询结果数量
-	 * @return object
+	 * @return self
 	 */
 	public function limit($limit) {
 		$this->options['limit'] = $limit;
@@ -298,7 +298,7 @@ class Model {
 	 * @param  integer $page     当前页数
 	 * @param  integer $pageSize 每页数量
 	 * @param  integer $scope    页数范围
-	 * @return object
+	 * @return self
 	 */
 	public function pager($page, $pageSize = 10, $scope = 10) {
 		$page = max(intval($page), 1);
@@ -402,5 +402,11 @@ class Model {
 		}else{
 			$this->pager['allPages'] = range($totalPage-$scope+1, $totalPage);
 		}
+	}
+
+	public function scalar(){
+		$this->limit(1);
+		$data = $this->select();
+		return isset($data[0][0]) ? $data[0][0] : '';
 	}
 }

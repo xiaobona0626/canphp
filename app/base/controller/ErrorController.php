@@ -25,6 +25,8 @@ class ErrorController extends BaseController {
 	 * @return void
 	 */
 	public function error($e=null){
+		print_r($e);
+		exit;
 		if(false!==stripos(get_class($e), 'Exception')) {
 			$this->errorMessage = $e->getMessage();
 			$this->errorCode = $e->getCode();
